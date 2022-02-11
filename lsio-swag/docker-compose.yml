@@ -21,3 +21,8 @@ services:
       - 443:443
       - 80:80
     restart: unless-stopped
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
