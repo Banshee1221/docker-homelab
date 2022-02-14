@@ -16,7 +16,7 @@ services:
       - DNSPLUGIN=cloudflare
       - CERTPROVIDER=zerossl
     volumes:
-      - ./swag:/config
+      - ./config:/config
     ports:
       - 443:443
       - 80:80
