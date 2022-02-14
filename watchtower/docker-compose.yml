@@ -5,4 +5,4 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 #      - ./config/config.json:/config.json:ro
-    command: --schedule "0 0 * * * *" --rolling-restart true
+    command: --schedule "0 0 * * * *" --rolling-restart=true
