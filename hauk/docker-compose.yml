@@ -1,0 +1,20 @@
+version: "3.4"
+services:
+
+  hauk:
+    image: bilde2910/hauk
+    restart: unless-stopped
+    container_name: hauk
+    volumes:
+      - ./config/:/etc/hauk
+    networks:
+      reverse-proxy:
+        aliases:
+          - hauk
+
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
+       
