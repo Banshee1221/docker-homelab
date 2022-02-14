@@ -4,5 +4,5 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./config/config.json:/config.json:ro
+#      - ./config/config.json:/config.json:ro
     command: --schedule "0 0 * * * *" --rolling-restart true
