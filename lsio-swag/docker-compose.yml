@@ -15,6 +15,7 @@ services:
       - VALIDATION=dns
       - DNSPLUGIN=cloudflare
       - CERTPROVIDER=zerossl
+      - EMAIL=eugene@debeste.co.za
     volumes:
       - ./config:/config
     ports:
