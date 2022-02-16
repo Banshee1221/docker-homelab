@@ -7,8 +7,6 @@ services:
       - ./postgresql:/var/lib/postgresql/data
     env_file:
       - ./.env
-    networks:
-      - internal
 
   web_recipes:
     image: vabene1111/recipes
@@ -20,8 +18,8 @@ services:
       - ./mediafiles:/opt/recipes/mediafiles
     depends_on:
       - db_recipes
-    networks:
-      - internal
+    links:
+      - db_recipes
 
   nginx_recipes:
     image: nginxinc/nginx-unprivileged:mainline-alpine
@@ -31,12 +29,14 @@ services:
       - ./.env
     depends_on:
       - web_recipes
+    links:
+      - web_recipes
     volumes:
       - ./nginx:/etc/nginx/conf.d:ro
       - staticfiles:/static
       - ./mediafiles:/media
     networks:
-      internal:
+      default:
       reverse-proxy:
         aliases:
           - tandoor
@@ -45,7 +45,6 @@ volumes:
   staticfiles:
 
 networks:
-  internal:
   reverse-proxy:
     external:
       name: reverse-proxy
