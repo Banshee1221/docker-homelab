@@ -1,0 +1,11 @@
+version: "3"
+services:
+  signal-cli:
+    image: registry.gitlab.com/packaging/signal-cli/signal-cli-jre:latest
+    command: daemon --tcp 0.0.0.0:7583
+    ports:
+      - "7583:7583"
+    volumes:
+      - "./config:/var/lib/signal-cli"
+    tmpfs:
+      - "/tmp:exec"
