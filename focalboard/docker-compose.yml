@@ -1,0 +1,35 @@
+version: "3"
+
+services:
+  focalboard:
+    image: mattermost/focalboard:latest
+    container_name: focalboard
+    depends_on:
+      - focalboard-db
+    links:
+      - focalboard-db
+    env_file:
+      - ./.env
+    volumes:
+      - "./config.json:/opt/focalboard/config.json"
+    restart: unless-stopped
+    networks:
+      default:
+      reverse-proxy:
+        aliases:
+          - focalboard
+
+  database:
+    image: postgres:latest
+    container_name: focalboard-postgres
+    restart: unless-stopped
+    volumes:
+      - "./postgresql:/var/lib/postgresql/data"
+    env_file:
+      - ./.env
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
+       
