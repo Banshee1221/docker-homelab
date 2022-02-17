@@ -5,9 +5,9 @@ services:
     image: mattermost/focalboard:latest
     container_name: focalboard
     depends_on:
-      - focalboard-db
+      - database
     links:
-      - focalboard-db
+      - database
     env_file:
       - ./.env
     volumes:
