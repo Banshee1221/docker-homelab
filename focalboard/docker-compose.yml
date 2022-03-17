@@ -1,6 +1,7 @@
 version: "3"
 
 services:
+
   focalboard:
     image: mattermost/focalboard:latest
     container_name: focalboard

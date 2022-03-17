@@ -1,0 +1,29 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress:5
+    restart: unless-restarted
+    env_file:
+      - .env
+    volumes:
+      - ./wordpress:/var/www/html
+    networks:
+      default:
+      reverse-proxy:
+        aliases:
+          - wordpress
+
+  db:
+    image: mysql:8
+    restart: unless-restarted
+    env_file:
+      - .env
+    volumes:
+      - ./mysql:/var/lib/mysql    
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
