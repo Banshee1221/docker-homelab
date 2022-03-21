@@ -33,8 +33,10 @@ services:
       - ./consume:/usr/src/paperless/consume
     env_file: .env
     networks:
-      - default
-      - reverse-proxy
+      default:
+      reverse-proxy:
+        aliases:
+        - wordpress
 
 networks:
   reverse-proxy:
