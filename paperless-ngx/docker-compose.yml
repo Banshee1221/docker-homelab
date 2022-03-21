@@ -1,0 +1,42 @@
+version: "3.4"
+services:
+  broker:
+    image: redis:6.0
+    restart: unless-stopped
+    networks:
+      - default
+
+  db:
+    image: postgres:13
+    restart: unless-stopped
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    env_file: .env
+    networks:
+      - default
+
+  webserver:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    restart: unless-stopped
+    depends_on:
+      - db
+      - broker
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./data:/usr/src/paperless/data
+      - ./media:/usr/src/paperless/media
+      - ./export:/usr/src/paperless/export
+      - ./consume:/usr/src/paperless/consume
+    env_file: .env
+    networks:
+      - default
+      - reverse-proxy
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
