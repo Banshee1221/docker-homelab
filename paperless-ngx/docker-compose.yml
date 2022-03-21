@@ -36,7 +36,7 @@ services:
       default:
       reverse-proxy:
         aliases:
-        - wordpress
+        - paperless
 
 networks:
   reverse-proxy:
