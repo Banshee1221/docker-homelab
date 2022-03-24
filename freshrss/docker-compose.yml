@@ -6,6 +6,7 @@ services:
     container_name: freshrss-db
     hostname: freshrss-db
     restart: unless-stopped
+    env_file: .env
     volumes:
       - ./db:/var/lib/postgresql/data
     networks:
@@ -24,6 +25,7 @@ services:
     environment:
       CRON_MIN: '*/20'
       TZ: Africa/Johannesburg
+    env_file: .env
     networks:
       default:
       reverse-proxy:
