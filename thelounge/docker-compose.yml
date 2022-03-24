@@ -1,0 +1,21 @@
+version: "2.1"
+services:
+  thelounge:
+    image: lscr.io/linuxserver/thelounge
+    container_name: thelounge
+    environment:
+      - PUID=10000
+      - PGID=10000
+      - TZ=Africa/Johannesburg
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+    networks:
+      reverse-proxy:
+        aliases:
+          - thelounge
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
