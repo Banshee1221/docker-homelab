@@ -14,3 +14,12 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
+    networks:
+      reverse-proxy:
+        aliases:
+          - sonarr
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
