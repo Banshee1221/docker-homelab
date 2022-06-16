@@ -1,0 +1,26 @@
+---
+version: "2.1"
+services:
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    environment:
+      - PUID=10000
+      - PGID=10000
+      - TZ=Africa/Johannesburg
+      - AUTO_UPDATE=true
+    volumes:
+      - "./config:/config"
+      - "/mnt:/data"
+    ports:
+      - 9117:9117
+    restart: unless-stopped
+    networks:
+      reverse-proxy:
+        aliases:
+          - jackett
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
