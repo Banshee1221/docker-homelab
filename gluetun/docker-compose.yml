@@ -18,3 +18,13 @@ services:
       - "./config:/gluetun"
     env_file:
       - ./.env
+    networks:
+      default:
+      reverse-proxy:
+        aliases:
+          - jackett
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
