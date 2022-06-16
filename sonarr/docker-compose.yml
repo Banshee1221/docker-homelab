@@ -1,0 +1,16 @@
+---
+version: "2.1"
+services:
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:3.0.8
+    container_name: sonarr
+    environment:
+      - PUID=10000
+      - PGID=10000
+      - TZ=Africa/Johannesburg
+    volumes:
+      - "./config:/config"
+      - "/mnt:/data"
+    ports:
+      - 8989:8989
+    restart: unless-stopped
