@@ -1,0 +1,25 @@
+---
+version: "2.1"
+services:
+  sonarr:
+    image: lscr.io/linuxserver/radarr:4.1.0
+    container_name: radarr
+    environment:
+      - PUID=10000
+      - PGID=10000
+      - TZ=Africa/Johannesburg
+    volumes:
+      - "./config:/config"
+      - "/mnt:/data"
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+    networks:
+      reverse-proxy:
+        aliases:
+          - radarr
+
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy
