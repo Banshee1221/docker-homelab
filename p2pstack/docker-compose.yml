@@ -38,6 +38,8 @@ services:
       - "./config/qbittorrent:/config"
       - "/mnt:/data"
     restart: unless-stopped
+    depends_on:
+      - gluetun
     network_mode: "service:gluetun"
 
   jackett:
@@ -52,6 +54,8 @@ services:
       - "./config/jackett:/config"
       - "/mnt:/data"
     restart: unless-stopped
+    depends_on:
+      - gluetun
     network_mode: "service:gluetun"
 
 networks:
