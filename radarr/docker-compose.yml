@@ -1,7 +1,9 @@
 ---
-version: "2.1"
+
+version: "3"
 services:
-  sonarr:
+
+  radarr:
     image: lscr.io/linuxserver/radarr:4.1.0
     container_name: radarr
     environment:
@@ -18,8 +20,3 @@ services:
       reverse-proxy:
         aliases:
           - radarr
-
-networks:
-  reverse-proxy:
-    external:
-      name: reverse-proxy
